@@ -1,0 +1,13 @@
+ul.pagination
+  li
+    a(href="javascript:void(0);", ng-click="pagination.getPage('prev')", ng-hide="pagination.current_page == 1") 上一页
+  li(ng-class="{active: pagination.current_page == 1}")
+    a(href="javascript:void(0);", ng-click="pagination.getPage(1)", ng-show="pagination.total_page") 1
+  li(ng-hide="pagination.is_hide_left_ellipsis(pagination.current_page -1, pagination.total_page)", class="disabled")
+    span ...          
+  li(ng-repeat="page in pagination.pages", ng-class="{active: pagination.current_page == $index + 1}", ng-hide="$index == 0?true:pagination.is_hide_page($index, pagination.current_page -1, pagination.total_page)")
+    a(href="javascript:void(0);", ng-click="pagination.getPage($index+1)", ng-bind="$index+1")
+  li(ng-hide="pagination.is_hide_right_ellipsis(pagination.current_page -1, pagination.total_page)", class="disabled")
+    span ...
+  li
+    a(href="javascript:void(0);", ng-click="pagination.getPage('next')", ng-hide="pagination.current_page == pagination.total_page || pagination.total_page == 0") 下一页
